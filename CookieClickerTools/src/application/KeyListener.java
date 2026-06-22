@@ -43,7 +43,6 @@ public class KeyListener implements NativeKeyListener{
 			controller.getClicker().setClicking(false);
 			
 		} else if ( key.equals( controller.getClicker().getToggleKey() ) ) { //clicker toggle 
-			//System.out.println("testline");
 			controller.clickerClicking( null );
 		}
 	}

@@ -2,7 +2,6 @@ package application;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
@@ -23,8 +22,6 @@ public class Controller {
 			private TextField yText;
 			@FXML
 			private Circle clickerEnabledIndicator;
-			@FXML
-			private Button clickerSetPos;
 			@FXML
 			private CheckBox clickerUsePosition;
 			@FXML
@@ -118,9 +115,16 @@ public class Controller {
 			
 		}
 		
-			
-		public void clickerSetPosition() {
-			//TODO build the set pos button
+		/**
+		 * Changes the displayed values for x and y position of the mouse.
+		 * When a position based clicker is called, it fetches the values that are currently
+		 * in the text fields, therefore no other changes are needed to store the values. 
+		 * @param x The x position to be displayed in the UI
+		 * @param y The y position to be displayed in the UI
+		 */
+		public void clickerSetPosition(int x, int y) {
+			xText.setText( Integer.toString(x) );
+			yText.setText( Integer.toString(y) );
 		}
 		
 		public void clickerUseClickCount() {
@@ -135,10 +139,10 @@ public class Controller {
 		
 		
 	
-	//getters
-		public Clicker getClicker() {
-			return clicker;
-		}
+		//getters
+			public Clicker getClicker() {
+				return clicker;
+			}
 		
 	
 }

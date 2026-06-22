@@ -234,7 +234,7 @@ public class Clicker {
 		
 	}
 	
-	
+			
 	
 	//setters
 		//clicking
