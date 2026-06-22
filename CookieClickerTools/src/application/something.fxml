@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
+  <tabs>
+    <Tab text="Settings">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <CheckBox layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Allow Mouse Clicks" />
+                  <CheckBox layoutX="14.0" layoutY="31.0" mnemonicParsing="false" text="Enable Clicker" />
+                  <Button layoutX="466.0" layoutY="19.0" mnemonicParsing="false" text="Reset to Defaults" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+      <Tab text="Clicker">
+         <content>
+            <AnchorPane fx:id="toggleKeyDisplay" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="clickerDelay" layoutX="437.0" layoutY="19.0" prefHeight="25.0" prefWidth="152.0" promptText="ms between clicks" text="0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </TextField>
+                  <Text layoutX="331.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Click Interval ms" wrappingWidth="105.3671875" />
+                  <TextField fx:id="yText" layoutX="437.0" layoutY="67.0" prefHeight="25.0" prefWidth="152.0" promptText="Y pos" text="0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </TextField>
+                  <TextField layoutX="437.0" layoutY="42.0" prefHeight="25.0" prefWidth="152.0" promptText="X pos" text="0" fx:id="xText">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </TextField>
+                  <Text layoutX="331.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="X pos" wrappingWidth="105.3671875" />
+                  <Text layoutX="331.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Y pos" wrappingWidth="105.3671875" />
+                  <CheckBox layoutX="470.0" layoutY="101.0" mnemonicParsing="false" onAction="#clickerUsePosition" text="Use position?" />
+                  <Button fx:id="clickerSetPos" layoutX="356.0" layoutY="97.0" mnemonicParsing="false" onAction="#clickerChangePos" text="Set Pos" />
+                  <CheckBox layoutX="458.0" layoutY="186.0" mnemonicParsing="false" onAction="#clickerUseClickCount" text="Use Click Count?" />
+                  <TextField fx:id="clickerClickCount" layoutX="439.0" layoutY="161.0" text="100" />
+                  <Text layoutX="375.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Click Count" />
+                  <Circle fx:id="clickerEnabledIndicator" fill="#ff1f1f" layoutX="104.0" layoutY="262.0" radius="67.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="42.0" AnchorPane.leftAnchor="37.0" AnchorPane.rightAnchor="429.0" AnchorPane.topAnchor="195.0" />
+                  <TextField fx:id="clickerToggleKeyDisplay" layoutX="15.0" layoutY="19.0" prefHeight="25.0" prefWidth="90.0" text="F1" />
+                  <Label layoutX="112.0" layoutY="23.0" text="Toggle Key" />
+                  <Button layoutX="21.0" layoutY="51.0" mnemonicParsing="false" onAction="#clickerChangeKey" text="Change Key" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab text="Rebirth">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <CheckBox layoutX="21.0" layoutY="14.0" mnemonicParsing="false" text="Enabled" />
+                  <Text layoutX="24.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Toggle Key : f2" />
+                  <Button layoutX="14.0" layoutY="67.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Change Key" />
+                  <Text layoutX="242.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Info Text">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab text="Auto Toggles">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="402.0" prefWidth="600.0">
+               <children>
+                  <CheckBox layoutY="6.0" mnemonicParsing="false" text="Upgrades" />
+                  <CheckBox layoutY="23.0" mnemonicParsing="false" text="Buildings" />
+                  <CheckBox layoutY="40.0" mnemonicParsing="false" text="CheckBox" />
+                  <CheckBox layoutY="57.0" mnemonicParsing="false" text="CheckBox" />
+                  <CheckBox layoutY="74.0" mnemonicParsing="false" text="CheckBox" />
+                  <CheckBox layoutY="91.0" mnemonicParsing="false" text="CheckBox" />
+                  <CheckBox layoutY="108.0" mnemonicParsing="false" text="CheckBox" />
+                  <CheckBox layoutY="125.0" mnemonicParsing="false" text="CheckBox" />
+                  <CheckBox layoutY="142.0" mnemonicParsing="false" text="CheckBox" />
+                  <CheckBox layoutY="159.0" mnemonicParsing="false" text="CheckBox" />
+                  <CheckBox layoutY="177.0" mnemonicParsing="false" text="CheckBox" />
+                  <CheckBox layoutY="194.0" mnemonicParsing="false" text="CheckBox" />
+                  <CheckBox layoutY="211.0" mnemonicParsing="false" text="CheckBox" />
+                  <CheckBox layoutY="228.0" mnemonicParsing="false" text="CheckBox" />
+                  <CheckBox layoutY="245.0" mnemonicParsing="false" text="CheckBox" />
+                  <CheckBox layoutY="262.0" mnemonicParsing="false" text="CheckBox" />
+                  <CheckBox layoutY="279.0" mnemonicParsing="false" text="CheckBox" />
+                  <CheckBox layoutY="296.0" mnemonicParsing="false" text="CheckBox" />
+                  <CheckBox layoutY="313.0" mnemonicParsing="false" text="CheckBox" />
+                  <CheckBox layoutY="330.0" mnemonicParsing="false" text="CheckBox" />
+                  <CheckBox layoutY="347.0" mnemonicParsing="false" text="CheckBox" />
+                  <Button layoutX="118.0" layoutY="11.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="79.0" text="Enable All" />
+                  <Button layoutX="117.0" layoutY="36.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Disable All" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab text="Farm">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TextArea layoutX="158.0" layoutY="86.0" prefHeight="200.0" prefWidth="200.0" text="Auto Planting&#10;Auto harvasting&#10;weed removal&#10;" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab text="Golden Cookies">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Text layoutX="14.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WIP">
+                     <font>
+                        <Font name="System Bold" size="48.0" />
+                     </font>
+                  </Text>
+                  <TextArea layoutX="252.0" layoutY="86.0" prefHeight="200.0" prefWidth="200.0" text="Automatic golden cookie clicking&#10;Automatic sell on combo&#10;Automatic gc buy on frenzy &#10;" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+  </tabs>
+</TabPane>
