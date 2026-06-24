@@ -26,18 +26,26 @@ public class MouseListener implements NativeMouseListener{
 		controller.getClicker().setClicking(false);
 		
 		int mouseButton = n.getButton();
+		/*
 		if ( mouseButton != 1 ) {
 			Logger.log("Mouse : " + mouseButton + " @" + n.getPoint().toString()); 
 			
-		}
+		}*/
+		
+		int x = n.getPoint().x;
+		int y = n.getPoint().y;
 		
 		if ( mouseButton == 2 ) { 
 			
-			int x = n.getPoint().x;
-			int y = n.getPoint().y;
+			
 			Logger.log("Clicker position updated to (" + x + ", " + y + ")");
 			controller.clickerSetPosition(x, y);
 		}
+		if ( Rebirth.getBuilding() ) {
+			Rebirth.setLastClickPosition( new Coordinate( x, y ) );
+			Rebirth.setContinueThread(true);
+		}
+		
 
 	}
 	
