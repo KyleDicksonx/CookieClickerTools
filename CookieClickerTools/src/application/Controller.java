@@ -1,58 +1,54 @@
 package application;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 public class Controller {
 	
+	//tabs
+		private Clicker clicker = new Clicker();
+		private Rebirth rebirth;
 	
-	
+	//threads
+		private Thread rebirthThread;
+		
 	
 	//clicker
-		//FXML
-			@FXML
-			private TextField clickerToggleKeyDisplay;
-			@FXML
-			private TextField xText;
-			@FXML
-			private TextField yText;
-			@FXML
-			private Circle clickerEnabledIndicator;
-			@FXML
-			private CheckBox clickerUsePosition;
-			@FXML
-			private TextField clickerClickCount;
-			@FXML
-			private CheckBox clickerUseClickCount;
-			@FXML
-			private TextField clickerDelay;
-			@FXML
-
-			
-			
-			
-			
-			
-		//other
-			private Clicker clicker = new Clicker();
-		
-		
-		
+		@FXML
+		private TextField clickerToggleKeyDisplay;
+		@FXML
+		private TextField xText;
+		@FXML
+		private TextField yText;
+		@FXML
+		private Circle clickerEnabledIndicator;
+		@FXML
+		private TextField clickerClickCount;
+		@FXML
+		private TextField clickerDelay;
 		
 		
 	//Settings
 	//Rebirth
+		@FXML
+		private TextField rebirthToggleKey;
+		@FXML
+		private TextArea rebirthLocationDisplay;
+		@FXML
+		private Label rebirthCurrentItemToClickText;
 	//Auto Toggles
 	//Farm
 	//Golden Cookies
 	
 	
 		
-	//Clicker tab actions
+	//Clicker tab actions -----------------------------------------------------------------
 		public void clickerChangeKey(ActionEvent e) {
 			Logger.log("Clicker.clickerChangeKey called");
 			clicker.setToggleKey( clickerToggleKeyDisplay.getText() );
@@ -135,14 +131,50 @@ public class Controller {
 			}
 			
 		}
-		
-		
-		
 	
-		//getters
-			public Clicker getClicker() {
-				return clicker;
-			}
+		
+	//Rebirth Tab Actions -----------------------------------------------------------------------------
+		
+		public void rebirthChangeKeyPressed() {
+			//TODO implement changing the toggle key
+			//reuse ideas from the clicker tab toggle key
+		}
+		
+		public void rebirthStartRecording() {
+			
+			Logger.log("Rebirth location logging started.");
+			rebirthThread = new Thread(() ->  {
+				
+				Logger.log("Rebirth Thread Created");
+				
+				Coordinate[] c = Rebirth.locationBuilderController( rebirthCurrentItemToClickText );
+				this.rebirth = new Rebirth(	c[0].x, c[0].y,
+											c[1].x, c[1].y,
+											c[2].x, c[2].y,
+											c[3].x, c[3].y,
+											c[4].x, c[4].y,
+											c[5].x, c[5].y );
+				
+				Logger.log("Full coordinates for rebirth built.");
+				
+				StringBuilder display = new StringBuilder();
+				for ( Coordinate i : c ) {
+					display.append( i.toString() + "\n");
+				}
+				
+				Platform.runLater( () -> { rebirthLocationDisplay.setText( display.toString() ); } );
+			});
+			rebirthThread.start();
+		}
+		
+		
+	//getters
+		public Clicker getClicker() {
+			return clicker;
+		}
+		public Rebirth getRebirth() {
+			return rebirth;
+		}
 		
 	
 }
