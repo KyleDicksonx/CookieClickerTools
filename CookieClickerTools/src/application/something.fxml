@@ -26,7 +26,7 @@
     </Tab>
       <Tab text="Clicker">
          <content>
-            <AnchorPane fx:id="toggleKeyDisplay" prefHeight="200.0" prefWidth="200.0">
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
                   <TextField fx:id="clickerDelay" layoutX="437.0" layoutY="19.0" prefHeight="25.0" prefWidth="152.0" promptText="ms between clicks" text="0">
                      <font>
@@ -47,7 +47,6 @@
                   <Text layoutX="331.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="X pos" wrappingWidth="105.3671875" />
                   <Text layoutX="331.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Y pos" wrappingWidth="105.3671875" />
                   <CheckBox layoutX="470.0" layoutY="101.0" mnemonicParsing="false" onAction="#clickerUsePosition" text="Use position?" />
-                  <Button fx:id="clickerSetPos" layoutX="356.0" layoutY="97.0" mnemonicParsing="false" onAction="#clickerChangePos" text="Set Pos" />
                   <CheckBox layoutX="458.0" layoutY="186.0" mnemonicParsing="false" onAction="#clickerUseClickCount" text="Use Click Count?" />
                   <TextField fx:id="clickerClickCount" layoutX="439.0" layoutY="161.0" text="100" />
                   <Text layoutX="375.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Click Count" />
@@ -55,6 +54,7 @@
                   <TextField fx:id="clickerToggleKeyDisplay" layoutX="15.0" layoutY="19.0" prefHeight="25.0" prefWidth="90.0" text="F1" />
                   <Label layoutX="112.0" layoutY="23.0" text="Toggle Key" />
                   <Button layoutX="21.0" layoutY="51.0" mnemonicParsing="false" onAction="#clickerChangeKey" text="Change Key" />
+                  <Label layoutX="294.0" layoutY="101.0" text="Right Click to change position " />
                </children>
             </AnchorPane>
          </content>
@@ -63,14 +63,13 @@
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <CheckBox layoutX="21.0" layoutY="14.0" mnemonicParsing="false" text="Enabled" />
-                  <Text layoutX="24.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Toggle Key : f2" />
-                  <Button layoutX="14.0" layoutY="67.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Change Key" />
-                  <Text layoutX="242.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Info Text">
-                     <font>
-                        <Font size="30.0" />
-                     </font>
-                  </Text>
+                  <Button layoutX="20.0" layoutY="63.0" mnemonicParsing="false" onAction="#rebirthChangeKeyPressed" prefHeight="25.0" prefWidth="80.0" text="Change Key" />
+                  <TextField fx:id="rebirthToggleKey" layoutX="14.0" layoutY="30.0" prefHeight="25.0" prefWidth="91.0" text="F2" />
+                  <Label layoutX="115.0" layoutY="34.0" text="Toggle Key" />
+                  <Button layoutX="251.0" layoutY="276.0" mnemonicParsing="false" onAction="#rebirthStartRecording" text="Start Recording" />
+                  <Label layoutX="435.0" layoutY="6.0" text="Location Display" />
+                  <Label fx:id="rebirthCurrentItemToClickText" layoutX="246.0" layoutY="314.0" text="Current item to click" />
+                  <TextArea fx:id="rebirthLocationDisplay" editable="false" layoutX="378.0" layoutY="30.0" prefHeight="165.0" prefWidth="200.0" promptText="Location info" />
                </children>
             </AnchorPane>
          </content>
