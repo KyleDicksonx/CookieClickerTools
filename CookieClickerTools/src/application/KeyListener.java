@@ -37,6 +37,7 @@ public class KeyListener implements NativeKeyListener{
 		//System.out.println(controller.getClicker().getToggleKey());
 		//Logger.log( "KeyDown : " + key );
 		
+
 		//executes the correct action for the pressed key.
 		//Note: Don't use switch, it needs constants.
 		if ( key.equals("Escape") ) { //Kill Switch
@@ -44,7 +45,15 @@ public class KeyListener implements NativeKeyListener{
 			
 		} else if ( key.equals( controller.getClicker().getToggleKey() ) ) { //clicker toggle 
 			controller.clickerClicking( null );
+		} else if ( key.equals( controller.getRebirth().getToggleKey() ) ) {
+			controller.getRebirth().toggleContinueRebirth();
+			if ( controller.getRebirth().getContnueRebirth() ) {
+				controller.rebirthRunRebirth();
+			}
+				
 		}
+
+		
 	}
 	
 	@Override

@@ -142,13 +142,15 @@ public class Controller {
 		
 		public void rebirthStartRecording() {
 			
+			//TODO add the option to save and load from file for easy access
 			Logger.log("Rebirth location logging started.");
 			rebirthThread = new Thread(() ->  {
 				
 				Logger.log("Rebirth Thread Created");
 				
 				Coordinate[] c = Rebirth.locationBuilderController( rebirthCurrentItemToClickText );
-				this.rebirth = new Rebirth(	c[0].x, c[0].y,
+				this.rebirth = new Rebirth(	c[
+				                           	  0].x, c[0].y,
 											c[1].x, c[1].y,
 											c[2].x, c[2].y,
 											c[3].x, c[3].y,
@@ -157,12 +159,22 @@ public class Controller {
 				
 				Logger.log("Full coordinates for rebirth built.");
 				
+				//Build the coordinates to be displayed in the text area
 				StringBuilder display = new StringBuilder();
 				for ( Coordinate i : c ) {
 					display.append( i.toString() + "\n");
 				}
 				
+				//update the text area in the JavaFX thread
 				Platform.runLater( () -> { rebirthLocationDisplay.setText( display.toString() ); } );
+			});
+			rebirthThread.start();
+		}
+		
+		public void rebirthRunRebirth() {
+			Logger.log("Running reirth cycle from Controller.rebirthRunRebirth");
+			rebirthThread = new Thread( () -> { 
+				rebirth.runRebirth(); 
 			});
 			rebirthThread.start();
 		}
