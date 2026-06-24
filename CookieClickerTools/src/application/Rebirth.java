@@ -176,7 +176,7 @@ public class Rebirth {
 				
 				click( buyAllUpgrades );
 				
-				r.mouseMove( buyGrandma.x, buyGrandma.y - LOWER_OFFSET);
+				r.mouseMove( lower.x, lower.y);
 				Thread.sleep( 100 );
 				click( buy100 );
 				
@@ -184,21 +184,21 @@ public class Rebirth {
 
 				
 				//buildings and upgrades 1
-					r.mouseMove( buyGrandma.x, buyGrandma.y - LOWER_OFFSET);
+					r.mouseMove( lower.x, lower.y);
 					//buy 2 sets
 						Thread.sleep(100);	
 						buyCycle(2);
 					click( buyAllUpgrades );
 					Thread.sleep( 100 );
 				//buildings and upgrades 2
-					r.mouseMove( buyGrandma.x, buyGrandma.y - LOWER_OFFSET);
+					r.mouseMove( lower.x, lower.y);
 					//buy 2 sets
 						Thread.sleep(100);	
 						buyCycle(2);
 					click( buyAllUpgrades );
 					Thread.sleep( 100 );
 				//buildings and upgrades 3
-					r.mouseMove( buyGrandma.x, buyGrandma.y - LOWER_OFFSET);
+					r.mouseMove( lower.x, lower.y);
 					Thread.sleep(100);
 					buyCycle(1);
 					click( buyAllUpgrades );
@@ -207,7 +207,7 @@ public class Rebirth {
 				
 				Thread.sleep( 1000 );
 				//buy
-					r.mouseMove( buyGrandma.x, buyGrandma.y - LOWER_OFFSET);
+					r.mouseMove( lower.x, lower.y);
 					Thread.sleep(100);
 					buyCycle(1);
 				Thread.sleep(900);
