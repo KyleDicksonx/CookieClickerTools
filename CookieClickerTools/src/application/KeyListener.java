@@ -45,12 +45,14 @@ public class KeyListener implements NativeKeyListener{
 			
 		} else if ( key.equals( controller.getClicker().getToggleKey() ) ) { //clicker toggle 
 			controller.clickerClicking( null );
-		} else if ( key.equals( controller.getRebirth().getToggleKey() ) ) {
-			controller.getRebirth().toggleContinueRebirth();
-			if ( controller.getRebirth().getContnueRebirth() ) {
-				controller.rebirthRunRebirth();
-			}
-				
+			
+		} else if ( controller.getRebirth() != null ) { //rebirth toggle
+			//ensures rebirth exists before attempting to toggle rebirth clicking
+			toggleRebirth( key );
+			
+	
+		} else if ( key.equals( controller.getWrinkler().getToggleKey() ) ) { // wrinkler toggle
+			controller.getWrinkler().toggleClicking();
 		}
 
 		
@@ -59,6 +61,19 @@ public class KeyListener implements NativeKeyListener{
 	@Override
 	public void nativeKeyReleased( NativeKeyEvent n ) {
 		//Logger.log("KeyUp : " + NativeKeyEvent.getKeyText(n.getKeyCode()));
+	}
+	
+	/**
+	 * 
+	 * @param key A String containing the name of a key
+	 */
+	private void toggleRebirth( String key ) {
+		if ( key.equals( controller.getRebirth().getToggleKey() ) ) {
+			controller.getRebirth().toggleContinueRebirth();
+			if ( controller.getRebirth().getContnueRebirth() ) {
+				controller.rebirthRunRebirth();
+			}
+		}
 	}
 	
 	

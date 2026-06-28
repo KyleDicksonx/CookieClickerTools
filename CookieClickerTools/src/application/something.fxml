@@ -50,7 +50,7 @@
                   <CheckBox layoutX="458.0" layoutY="186.0" mnemonicParsing="false" onAction="#clickerUseClickCount" text="Use Click Count?" />
                   <TextField fx:id="clickerClickCount" layoutX="439.0" layoutY="161.0" text="100" />
                   <Text layoutX="375.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Click Count" />
-                  <Circle fx:id="clickerEnabledIndicator" fill="#ff1f1f" layoutX="104.0" layoutY="262.0" radius="67.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="42.0" AnchorPane.leftAnchor="37.0" AnchorPane.rightAnchor="429.0" AnchorPane.topAnchor="195.0" />
+                  <Circle fx:id="clickerEnabledIndicator" fill="#ff1f1f" layoutX="88.0" layoutY="154.0" radius="67.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="445.0" AnchorPane.topAnchor="87.0" />
                   <TextField fx:id="clickerToggleKeyDisplay" layoutX="15.0" layoutY="19.0" prefHeight="25.0" prefWidth="90.0" text="F1" />
                   <Label layoutX="112.0" layoutY="23.0" text="Toggle Key" />
                   <Button layoutX="21.0" layoutY="51.0" mnemonicParsing="false" onAction="#clickerChangeKey" text="Change Key" />
@@ -58,6 +58,20 @@
                </children>
             </AnchorPane>
          </content>
+      </Tab>
+      <Tab text="Wrinkler">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Button layoutX="262.0" layoutY="214.0" mnemonicParsing="false" text="Build Circle" />
+                  <TextField layoutX="12.0" layoutY="14.0" prefHeight="25.0" prefWidth="80.0" text="F3" />
+                  <Label layoutX="98.0" layoutY="18.0" text="Toggle Key" />
+                  <Label layoutX="277.0" layoutY="251.0" text="Info Text" />
+                  <Button layoutX="12.0" layoutY="49.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Change Key" />
+                  <TextArea layoutX="387.0" layoutY="27.0" prefHeight="100.0" prefWidth="200.0" />
+                  <Label layoutX="443.0" layoutY="10.0" text="Location Display" />
+               </children></AnchorPane>
+        </content>
       </Tab>
       <Tab text="Rebirth">
          <content>

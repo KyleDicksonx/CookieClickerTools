@@ -13,6 +13,7 @@ public class Controller {
 	
 	//tabs
 		private Clicker clicker = new Clicker();
+		private Wrinkler wrinkler = new Wrinkler();
 		private Rebirth rebirth;
 	
 	//threads
@@ -82,10 +83,8 @@ public class Controller {
 			//call the correct clicker
 			//Logger.log("Use pos " + clicker.getUsePosition());
 			if ( clicker.getUsePosition() ) {
-				clicker.toggleClicking(
-						Integer.parseInt(xText.getText()),
-						Integer.parseInt(yText.getText())
-				);
+				clicker.toggleClicking( new Coordinate ( 	Integer.parseInt( xText.getText() ), 
+															Integer.parseInt( yText.getText() ) ) );
 			} else {
 				clicker.toggleClicking();
 			}	
@@ -149,8 +148,7 @@ public class Controller {
 				Logger.log("Rebirth Thread Created");
 				
 				Coordinate[] c = Rebirth.locationBuilderController( rebirthCurrentItemToClickText );
-				this.rebirth = new Rebirth(	c[
-				                           	  0].x, c[0].y,
+				this.rebirth = new Rebirth(	c[0].x, c[0].y,
 											c[1].x, c[1].y,
 											c[2].x, c[2].y,
 											c[3].x, c[3].y,
@@ -186,6 +184,9 @@ public class Controller {
 		}
 		public Rebirth getRebirth() {
 			return rebirth;
+		}
+		public Wrinkler getWrinkler() {
+			return wrinkler;
 		}
 		
 	
