@@ -19,7 +19,6 @@ public class Rebirth {
 	private Coordinate reincarnate;
 	private Coordinate lower;
 	
-	private static Coordinate lastClickPosition = null;
 	private static boolean continueThread = false;
 	private volatile static boolean building = false;
 	private volatile boolean continueRebirth = false;
@@ -142,14 +141,11 @@ public class Rebirth {
 			
 			
 			continueThread = false;
-			return new Coordinate( lastClickPosition.x, lastClickPosition.y );
+			return MouseListener.getLastClickPosition();
 			
 		}
 	
 	//setters
-		public static void setLastClickPosition ( Coordinate c ) {
-			Rebirth.lastClickPosition = c;
-		}
 
 		public static void setContinueThread( boolean b ) {
 			Rebirth.continueThread = b;
