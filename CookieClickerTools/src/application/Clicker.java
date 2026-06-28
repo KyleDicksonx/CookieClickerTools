@@ -1,5 +1,5 @@
 package application;
-
+//TODO update all comments to reflect the change to Coordinate objects over x, y
 
 import java.awt.AWTException;
 import java.awt.Robot;
@@ -10,11 +10,11 @@ import java.time.Duration;
 public class Clicker {
 	
 	private Thread clickingThread;
-	private volatile boolean clicking = false; 
+	protected volatile boolean clicking = false; 
 	private boolean usePosition = false, useClickCount = false;
 	private int delay = 100; //the setter sets this to input - 1 so that the next click happens in the ms requested
 	private int clickCount = 100;
-	private Robot robot;
+	protected Robot robot;
 	
 	private String toggleKey = "F1"; //must be upper case, enforced by the setter
 	
@@ -23,6 +23,17 @@ public class Clicker {
 	 * Use setters for setting delay, no other constructors should be needed
 	 */
 	public Clicker() {
+		
+		//creates the robot for executing mouse output
+		try {
+			robot = new Robot();
+		} catch ( AWTException e ) {
+			Logger.log("AWTException caught in Clicker constructor, Mouse and keyboard output may not function.S");
+		}
+	}
+	
+	public Clicker( String toggleKey ) {
+		this.toggleKey = toggleKey;
 		
 		//creates the robot for executing mouse output
 		try {
@@ -65,7 +76,7 @@ public class Clicker {
 	 * @param x The x position the mouse will click at
 	 * @param y The y position the mouse will click at
 	 */
-	public void toggleClicking(int x, int y) {
+	public void toggleClicking( Coordinate c ) {
 		if ( !clicking ) {
 			
 			clicking = true;
@@ -74,7 +85,7 @@ public class Clicker {
 			//set the clicking thread
 			clickingThread = new Thread(() ->  {
 				Logger.log("Position Clicking Thread Created");
-				clickerChooser(x, y);	
+				clickerChooser( c );	
 				
 			});
 			clickingThread.setDaemon(true);//allows the program to be killed with this thread still active
@@ -109,8 +120,8 @@ public class Clicker {
 		 * @param x The x position the mouse will click at
 		 * @param y The y position the mouse will click at
 		 */
-		public void clickPos(int x, int y) {
-			robot.mouseMove(x, y);
+		public void clickPos( Coordinate c ) {
+			robot.mouseMove( c.x, c.y );
 			clickHere();
 		}
 	
@@ -131,11 +142,11 @@ public class Clicker {
 		 * @param x x position that the mouse will be moved to
 		 * @param y y position that the mouse will be moved to
 		 */
-		public void clicking(int x, int y) {
+		public void clicking( Coordinate c ) {
 			Logger.log("Clicker.clicking(x,y) called");
 			
 			while ( clicking ) {
-				clickPos(x,y);
+				clickPos( c );//TODO update with Coordinate obj
 				try {
 					Thread.sleep(delay);
 				} catch (InterruptedException e) {
@@ -153,12 +164,12 @@ public class Clicker {
 		 * @param x x position that the mouse will be moved to
 		 * @param y y position that the mouse will be moved to
 		 */
-		public void countClicking(int x, int y) {
+		public void countClicking( Coordinate c ) {
 			Logger.log("Clicker.countClicking(x,y) called");
 			
 			int counter = 0;
 			while ( clicking && counter < clickCount) {
-				clickPos(x,y);
+				clickPos( c );
 				try {
 					Thread.sleep(delay);
 				} catch (InterruptedException e) {
@@ -206,13 +217,12 @@ public class Clicker {
 	 * @param x The x position the mouse will be clicked at
 	 * @param y The y position the mouse will be clicked at
 	 */ 
-	public void clickerChooser(int x, int y) {
+	public void clickerChooser( Coordinate c ) {
 		if ( useClickCount ) {
 			
-			
-			countClicking(x,y);
+			countClicking( c );
 		} else {
-			clicking(x,y);
+			clicking( c );
 		}
 	}
 	public void clickerChooser() {
