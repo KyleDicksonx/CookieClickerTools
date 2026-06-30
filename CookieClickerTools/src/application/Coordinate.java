@@ -1,5 +1,8 @@
 package application;
 
+/**
+ * Used anywhere a (x, y) is needed
+ */
 public class Coordinate {
 	
 	public int x, y;
@@ -14,20 +17,22 @@ public class Coordinate {
 		this.y = y;
 	}
 	
-	public void setX ( int x ) {
-		this.x = x;
-	}
-	
-	public void setY ( int y ) {
-		this.y = y;
-	}
-	
+	/**
+	 * Takes the current Coordinate and outputs a string in
+	 * the following format: "(x, y)".
+	 * @return A String 
+	 */
 	public String toString () {
 		return "(" + x + ", " + y + ")";
 		
 	}
 	
-	
+	/**
+	 * Takes an array of Coordinate objects and creates a single
+	 * string containing all of the given coordinates listed first to last. 
+	 * @param c An array of Coordinate objects
+	 * @return A String containing all of the coordinates in the given array
+	 */
 	public String toString ( Coordinate[] c ) {
 		
 		StringBuilder sb = new StringBuilder();
@@ -36,8 +41,7 @@ public class Coordinate {
 			sb.append( "(" + i.x + ", " + i.y + "), " );
 		}
 		
-		return sb.toString();
-		
+		return sb.toString();		
 	}
 	
 	
