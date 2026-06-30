@@ -57,9 +57,12 @@ public class Main extends Application {
 			
 			Scene scene = new Scene(root,BG_COLOR);
 			
-			GlobalScreen.registerNativeHook();
-			GlobalScreen.addNativeKeyListener(KEY_LISTENER);
-			GlobalScreen.addNativeMouseListener(MOUSE_LISTENER);
+			//Mouse and key Listeners
+				
+				nativeHookLogFixer();
+				GlobalScreen.registerNativeHook();
+				GlobalScreen.addNativeKeyListener(KEY_LISTENER);
+				GlobalScreen.addNativeMouseListener(MOUSE_LISTENER);
 			
 			stage.setTitle(SCENE_TITLE);
 			
@@ -112,6 +115,18 @@ public class Main extends Application {
 		Logger.buildLogger();
 		//launch calls start()
 		launch(args);
+	}
+	
+	/**
+	 * Fixes the JNativeHook Logger without importing java.util.logging.Logger.
+	 * I already made my own Logger class this will conflict with.
+	 * Stops JNativeHook from filling the console with "WARNING: process_button_pressed [332]: Click count overflow detected!"
+	 * after a small click limit is reached. 
+	 */
+	private static void nativeHookLogFixer() {
+		java.util.logging.Logger nativeHookLogFixer = 
+				java.util.logging.Logger.getLogger( GlobalScreen.class.getPackage().getName() );
+		nativeHookLogFixer.setLevel(java.util.logging.Level.SEVERE);
 	}
 }
 
