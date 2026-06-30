@@ -2,7 +2,7 @@ package application;
 
 import javafx.application.Platform;
 import javafx.scene.control.Label;
-import javafx.scene.text.Text;
+import javafx.scene.control.TextArea;
 
 public class Wrinkler extends Clicker{
 	
@@ -21,13 +21,16 @@ public class Wrinkler extends Clicker{
 	
 	@Override
 	public void toggleClicking() {
+		
+		//Logger.log("Wrinkler.toggleClickng called");
+		
 		if ( !clicking ) {
 			if ( circlePoints == null ) {
 				Logger.log( "Can not enable the circle clicker. Circle has not been created.");
 			} else {
 				clicking = true;
 				Logger.log("Wrinkler.toggleClicking -> true");
-				//set the clicking thread
+				//set the wrinkler thread
 				wrinklerThread = new Thread(() ->  {
 					Logger.log("Wrinikler Thread Created");
 					circleClicker();
@@ -48,17 +51,19 @@ public class Wrinkler extends Clicker{
 	 * Continues clicking until clicking is disabled through a hotkey
 	 */
 	private void circleClicker() {
+		//Logger.log("Wrinkler.circleClicker called");
+		
 		int currentPos = 0;
 		
 		while ( clicking ) {
-			
+			//System.out.println("loop");
 			//resets the circle
 			if ( currentPos >= 360) {
 				currentPos = 0;
 			}
 			
 			clickPos( circlePoints[currentPos] );	
-
+			currentPos++;
 		}		
 	}
 	
@@ -71,15 +76,24 @@ public class Wrinkler extends Clicker{
 	 * 
 	 * @param t
 	 */
-	private void circleMaker( Label t ) {
+	public void circleMaker( Label t, TextArea ta ) {
+		Logger.log("Wrinkler.circleMaker called");
+		//set the wrinkler thread
+		wrinklerThread = new Thread(() ->  {
+			//get up and down Coordinates for the circle
+			up = waitFetchClick( t, "Click the hightest point of the circle.");
+			down = waitFetchClick( t, "Click the lowest point of the circle. " );
+			
+			//make an array of positions around the circle
+			circlePoints = makeCirclePoints();
+			
+			Platform.runLater( () -> { ta.setText( up.toString() + "\n" + down.toString() ); } );
+			Platform.runLater( () -> { t.setText("All Positions Recorded."); } );
+		});
+		wrinklerThread.setDaemon(true);//allows the program to be killed with this thread still active
+		wrinklerThread.start();
 		
-		//get up and down Coordinates for the circle
-		up = waitFetchClick( t, "Click the hightest point of the circle.");
-		down = waitFetchClick( t, "Click the lowest point of the circle. " );
 		
-		//make an array of positions around the circle
-		
-		circlePoints = makeCirclePoints();
 		
 		
 	}
@@ -162,6 +176,14 @@ public class Wrinkler extends Clicker{
 		int xMid = ( a.x + b.x ) / 2;
 		int yMid = ( a.y + b.y ) / 2;
 		return new Coordinate( xMid, yMid );
+	}
+
+	
+	
+	//setters
+	public void setContinueThread( boolean b ) {
+		Wrinkler.continueThread = b;
+		
 	}
 	
 	

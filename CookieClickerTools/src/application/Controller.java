@@ -1,5 +1,5 @@
 package application;
-
+//TODO update all comments to reflect the change to Coordinate objects over x, y
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -33,8 +33,15 @@ public class Controller {
 		private TextField clickerClickCount;
 		@FXML
 		private TextField clickerDelay;
-		
-		
+	//Wrinkler
+		@FXML
+		private TextField wrinklerToggleKey;
+		@FXML 
+		private TextArea wrinklerLocationDisplay;
+		@FXML
+		private Label wrinklerWhereClickText;
+		@FXML
+		private Circle wrinklerClickingIndicator;
 	//Settings
 	//Rebirth
 		@FXML
@@ -43,6 +50,8 @@ public class Controller {
 		private TextArea rebirthLocationDisplay;
 		@FXML
 		private Label rebirthCurrentItemToClickText;
+		@FXML
+		private Circle rebirthClickingIndicator;
 	//Auto Toggles
 	//Farm
 	//Golden Cookies
@@ -117,9 +126,9 @@ public class Controller {
 		 * @param x The x position to be displayed in the UI
 		 * @param y The y position to be displayed in the UI
 		 */
-		public void clickerSetPosition(int x, int y) {
-			xText.setText( Integer.toString(x) );
-			yText.setText( Integer.toString(y) );
+		public void clickerSetPosition( Coordinate c) {
+			xText.setText( Integer.toString(c.x) );
+			yText.setText( Integer.toString(c.y) );
 		}
 		
 		public void clickerUseClickCount() {
@@ -166,17 +175,60 @@ public class Controller {
 				//update the text area in the JavaFX thread
 				Platform.runLater( () -> { rebirthLocationDisplay.setText( display.toString() ); } );
 			});
+			rebirthThread.setDaemon(true);//allows the program to be killed with this thread still active
 			rebirthThread.start();
 		}
 		
 		public void rebirthRunRebirth() {
 			Logger.log("Running reirth cycle from Controller.rebirthRunRebirth");
 			rebirthThread = new Thread( () -> { 
+				
+				rebirthSwapCircleColor();
 				rebirth.runRebirth(); 
+				rebirthSwapCircleColor();
+				
 			});
+			rebirthThread.setDaemon(true);//allows the program to be killed with this thread still active
 			rebirthThread.start();
 		}
 		
+		private void rebirthSwapCircleColor() {
+			if ( rebirth.getContnueRebirth() ) {
+				rebirthClickingIndicator.setFill(Color.GREEN);
+			} else {
+				rebirthClickingIndicator.setFill(Color.RED);
+			}
+		}
+		
+		
+	//Wrinkler Tab actons ---------------------------------------------------------------------------------------
+		public void wrinklerBuildCircle() {
+			wrinkler.circleMaker( wrinklerWhereClickText, wrinklerLocationDisplay );
+		}
+		
+		public void wrinklerChangeKey() {
+			//TODO implement key changing
+		}
+		
+		public void wrinklerToggleClicking() {
+			
+			wrinkler.toggleClicking();
+			wrinklerSwapCircleColor();
+		}
+		
+		private void wrinklerSwapCircleColor() {
+			if ( wrinkler.getClicking() ) {
+				wrinklerClickingIndicator.setFill(Color.GREEN);
+			} else {
+				wrinklerClickingIndicator.setFill(Color.RED);
+			}
+		}
+		
+		
+		
+		
+		
+	
 		
 	//getters
 		public Clicker getClicker() {

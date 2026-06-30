@@ -23,7 +23,8 @@ public class KeyListener implements NativeKeyListener{
 	 * Actions:
 	 * 	Escape - Hard coded kill switch for the clicker.
 	 * 	Toggle Clicking - Set by the user; defaults to F1.
-	 * 
+	 *  Toggle Rebirth - Set by the user; defaults to F2.
+	 *  Toggle Wrinkler - Set by the user; defaults to F3.
 	 * 
 	 * 
 	 * 
@@ -31,6 +32,8 @@ public class KeyListener implements NativeKeyListener{
 	 */
 	@Override
 	public void nativeKeyPressed( NativeKeyEvent n ){
+		//disableAllClickers();
+		
 		
 		//gets the name of the pressed key as a string
 		String key = NativeKeyEvent.getKeyText( n.getKeyCode() );
@@ -52,19 +55,24 @@ public class KeyListener implements NativeKeyListener{
 			
 	
 		} else if ( key.equals( controller.getWrinkler().getToggleKey() ) ) { // wrinkler toggle
-			controller.getWrinkler().toggleClicking();
+			controller.wrinklerToggleClicking();
 		}
 
 		
 	}
 	
+	/**
+	 * Unused method
+	 * @param 
+	 */
 	@Override
 	public void nativeKeyReleased( NativeKeyEvent n ) {
 		//Logger.log("KeyUp : " + NativeKeyEvent.getKeyText(n.getKeyCode()));
 	}
 	
 	/**
-	 * 
+	 * Calls controller.toggleRunRebirth() if the correct key is pressed
+	 * and if the rebirth cycle is set to continue.
 	 * @param key A String containing the name of a key
 	 */
 	private void toggleRebirth( String key ) {
@@ -74,6 +82,17 @@ public class KeyListener implements NativeKeyListener{
 				controller.rebirthRunRebirth();
 			}
 		}
+	}
+	
+	/**
+	 * Disables all of the following: Clicker, Rebirth, Wrinkler, 
+	 */
+	public void disableAllClickers() {
+		//TODO ensure all clickers are disabled here
+		Logger.log("Disabled All Clickers.");
+		controller.getClicker().setClicking(false);
+		Rebirth.setContinueThread(false);
+		controller.getWrinkler().setClicking(false);
 	}
 	
 	
