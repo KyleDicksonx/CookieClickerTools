@@ -1,5 +1,7 @@
 package application;
 
+import java.util.Arrays;
+
 import javafx.application.Platform;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -56,7 +58,7 @@ public class Wrinkler extends Clicker{
 		int currentPos = 0;
 		
 		while ( clicking ) {
-			//System.out.println("loop");
+			//System.out.println(currentPos);
 			//resets the circle
 			if ( currentPos >= 360) {
 				currentPos = 0;
@@ -89,6 +91,7 @@ public class Wrinkler extends Clicker{
 			
 			Platform.runLater( () -> { ta.setText( up.toString() + "\n" + down.toString() ); } );
 			Platform.runLater( () -> { t.setText("All Positions Recorded."); } );
+			System.out.println(Arrays.toString(circlePoints));
 		});
 		wrinklerThread.setDaemon(true);//allows the program to be killed with this thread still active
 		wrinklerThread.start();
@@ -128,20 +131,21 @@ public class Wrinkler extends Clicker{
 	 * @return
 	 */
 	private Coordinate[] makeCirclePoints() {
-		// r^2 = (x-midX)^2 + (y-midY)^2
-		
+
 		int r = getDistance(up, down) / 2;
+		
 		Coordinate midpoint = getMidpoint( up, down );
-		int x, y;
+		
 		Coordinate[] cords = new Coordinate[360];
 		
+		int x, y;
 		//one point for each degree around the circle
 		for ( int i = 0; i < 360; i++ ) {
 			
 			//loss of precision is not an issue as sub-pixel clicking is not possible
 			x = (int) ( midpoint.x + r * Math.cos(i) );
 			y = (int) ( midpoint.y + r * Math.sin(i) );
-			
+
 			cords[i] = new Coordinate( x, y );
 		}
 		
@@ -158,8 +162,8 @@ public class Wrinkler extends Clicker{
 	 */
 	private int getDistance( Coordinate a, Coordinate b) {
 		
-		int x = ( a.x - b.x ) * ( a.x - b.y );
-		int y = ( a.y - b.y ) * ( a.x - b.y );
+		int x = ( a.x - b.x ) * ( a.x - b.x );
+		int y = ( a.y - b.y ) * ( a.y - b.y );
 		
 		//Loss of accuracy is not an issue because you can't click between pixels
 		return (int) Math.sqrt( x + y );
