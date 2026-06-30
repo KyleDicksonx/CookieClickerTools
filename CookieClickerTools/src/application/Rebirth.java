@@ -168,10 +168,12 @@ public class Rebirth {
 		
 		private void rebirthCycle() {
 			try {
-				
+				//wait before clicking in a new cycle so that clicks process properly
+					Thread.sleep( 1500 );
+					
+					
 				click( buyAllUpgrades );
-				
-				r.mouseMove( lower.x, lower.y);
+				r.mouseMove( lower.x, lower.y); //close expanded upgrade menu
 				Thread.sleep( 100 );
 				click( buy100 );
 				
@@ -179,51 +181,52 @@ public class Rebirth {
 
 				
 				//buildings and upgrades 1
-					r.mouseMove( lower.x, lower.y);
-					//buy 2 sets
-						Thread.sleep(100);	
-						buyCycle(2);
+					r.mouseMove( lower.x, lower.y); //close expanded upgrade menu
+					Thread.sleep(100);	
+					buyCycle(2);
 					click( buyAllUpgrades );
 					Thread.sleep( 100 );
+					
 				//buildings and upgrades 2
-					r.mouseMove( lower.x, lower.y);
-					//buy 2 sets
-						Thread.sleep(100);	
-						buyCycle(2);
+					r.mouseMove( lower.x, lower.y); //close expanded upgrade menu
+					Thread.sleep(100);	
+					buyCycle(2);
 					click( buyAllUpgrades );
 					Thread.sleep( 100 );
+					
 				//buildings and upgrades 3
-					r.mouseMove( lower.x, lower.y);
+					r.mouseMove( lower.x, lower.y); //close expanded upgrade menu
 					Thread.sleep(100);
 					buyCycle(1);
 					click( buyAllUpgrades );
 					Thread.sleep(100);
 				
-				
-				Thread.sleep( 1000 );
-				//buy
-					r.mouseMove( lower.x, lower.y);
+				//the wait in between larger upgrade + buy cycles
+					Thread.sleep( 1000 );
+					
+				//final buy
+					r.mouseMove( lower.x, lower.y); //close expanded upgrade menu
 					Thread.sleep(100);
 					buyCycle(1);
-				Thread.sleep(900);
-				click ( buyAllUpgrades );
-				Thread.sleep( 1000 );
+					Thread.sleep(900);
+					click ( buyAllUpgrades );
+					Thread.sleep( 1000 );
 				
 				
 				//start over
-					click( legacy ); 
-					//enter (confirm)
-					click( KeyEvent.VK_ENTER );
-					click( KeyEvent.VK_ESCAPE );
+					//Legacy
+						click( legacy ); 
+						click( KeyEvent.VK_ENTER ); //confirm
+						click( KeyEvent.VK_ESCAPE );//skip animation
 						
 					Thread.sleep(100);
-					click ( reincarnate );
-					click ( KeyEvent.VK_ENTER );
-					Thread.sleep( 1500 );
-				
+					
+					//Reincarnate
+						click ( reincarnate );
+						click ( KeyEvent.VK_ENTER ); //confirm
+					
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				Logger.log( "A sleep was interupted in the Reincarnate clicker. Timings will be fixed within 2 cycles.");
 			}
 		}
 		
@@ -235,7 +238,7 @@ public class Rebirth {
 		private void click( Coordinate c ) throws InterruptedException {
 			r.mouseMove(c.x, c.y);
 			r.mousePress(InputEvent.BUTTON1_DOWN_MASK);
-			Thread.sleep(Duration.ofNanos(50000));
+			Thread.sleep(Duration.ofNanos(50000)); //allow the click to register before un-clicking
 			r.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
 		}
 		
