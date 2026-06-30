@@ -168,7 +168,6 @@ public class Rebirth {
 		
 		private void rebirthCycle() {
 			try {
-				long startTime = System.currentTimeMillis();
 				
 				click( buyAllUpgrades );
 				
