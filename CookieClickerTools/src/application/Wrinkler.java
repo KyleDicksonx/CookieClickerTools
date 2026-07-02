@@ -91,7 +91,7 @@ public class Wrinkler extends Clicker{
 			
 			Platform.runLater( () -> { ta.setText( up.toString() + "\n" + down.toString() ); } );
 			Platform.runLater( () -> { t.setText("All Positions Recorded."); } );
-			System.out.println(Arrays.toString(circlePoints));
+			Logger.log(Arrays.toString(circlePoints));
 		});
 		wrinklerThread.setDaemon(true);//allows the program to be killed with this thread still active
 		wrinklerThread.start();
@@ -185,10 +185,15 @@ public class Wrinkler extends Clicker{
 	
 	
 	//setters
-	public void setContinueThread( boolean b ) {
-		Wrinkler.continueThread = b;
-		
-	}
+		public void setContinueThread( boolean b ) {
+			Wrinkler.continueThread = b;
+			
+		}
+		//toggleKey
+		public void setToggleKey( String s ) {
+			this.toggleKey = s.toUpperCase();
+			Logger.log("Wrnkler toggle key set to : " + s );
+		}
 	
 	
 	
