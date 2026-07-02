@@ -16,7 +16,7 @@ import java.time.format.DateTimeFormatter;
 public class Logger {
 	
 	private static final String LOG_FILE_NAME = 
-			"Logs/log_" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("YYYY-MM-dd_HH-mm-ss"))+ ".txt";
+			"Logs/log_" + LocalDateTime.now().format( DateTimeFormatter.ofPattern("YYYY-MM-dd_HH-mm-ss") )+ ".txt";
 	private static String logMessage = "";
 	private static FileWriter fileWriter = null;
 	
@@ -40,7 +40,6 @@ public class Logger {
 		if ( fileWriter != null ) {
 			writeToFile(logMessage);
 		}
-
 	}
 	
 	/**
@@ -50,6 +49,7 @@ public class Logger {
 		String fileHeader = "[" + LocalDate.now() + "] : " + "Log File For CookieClickerTools";
 		writeToFile(fileHeader);
 	}
+	
 	/**
 	 * Opens the file and creates the FileWriter
 	 */

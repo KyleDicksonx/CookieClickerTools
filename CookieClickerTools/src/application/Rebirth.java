@@ -11,18 +11,21 @@ import javafx.scene.control.Label;
 
 public class Rebirth {
 	
-	private Coordinate buy100;
-	private Coordinate buyAllUpgrades;
-	private Coordinate buyCursor;
-	private Coordinate buyGrandma;
-	private Coordinate legacy;
-	private Coordinate reincarnate;
-	private Coordinate lower;
+	//Required Coordinates
+		private Coordinate buy100;
+		private Coordinate buyAllUpgrades;
+		private Coordinate buyCursor;
+		private Coordinate buyGrandma;
+		private Coordinate legacy;
+		private Coordinate reincarnate;
+		private Coordinate lower;
 	
-	private static boolean continueThread = false;
-	private volatile static boolean building = false;
-	private volatile boolean continueRebirth = false;
+	//loop and thread control
+		private static boolean continueThread = false;
+		private volatile static boolean building = false;
+		private volatile boolean continueRebirth = false;
 	
+	//How far below the lowest building to move the mouse to close the upgrade menu
 	private final int LOWER_OFFSET = 400;
 	
 	private Robot r = null;
@@ -70,34 +73,7 @@ public class Rebirth {
 			}
 		}
 			
-	//getters
-		public Coordinate getBuy100() {
-			return buy100;
-		}
-		public Coordinate getBuyAllUpgrades() {
-			return buyAllUpgrades;
-		}
-		public Coordinate getBuyCursor() {
-			return buyCursor;
-		}
-		public Coordinate getBuyGrandma() {
-			return buyGrandma;
-		}
-		public Coordinate getLegacy() {
-			return legacy;
-		}
-		public Coordinate getReincarnate() {
-			return reincarnate;
-		}
-		public static boolean getBuilding() {
-			return building;
-		}
-		public String getToggleKey() {
-			return toggleKey;
-		}
-		public boolean getContnueRebirth() {
-			return continueRebirth;
-		}
+
 		
 	
 	//building locations
@@ -145,20 +121,7 @@ public class Rebirth {
 			
 		}
 	
-	//setters
 
-		public static void setContinueThread( boolean b ) {
-			Rebirth.continueThread = b;
-		}
-		
-		/**
-		 * Takes a String, sets it to upper case, and assigns it to the toggleKey. Logs the action. 
-		 * @param s A String to become the toggle key
-		 */
-		public void setToggleKey( String s ) {
-			this.toggleKey = s.toUpperCase();
-			Logger.log("Rebirth toggle key set to : " + s );
-		}
 		
 	//Auto rebirth
 		/**
@@ -175,6 +138,21 @@ public class Rebirth {
 		}
 		
 		/**
+		 * TODO Do I need the lower movement, the mouse never moves over the upgrades, only clicks above them
+		 * 
+		 * Takes actions in this order (excluding menial waits):
+		 * Sleep 1500 - Wait for UI to allow clicks,
+		 * Buy all upgrades
+		 * Click buy 100,
+		 * repeat x 3
+		 * 		buy cycle x 2,
+		 * 		Buy all upgrades
+		 * Sleep 1000 - Allow more upgrades to appear
+		 * buy cycle x 1
+		 * buy all upgrades
+		 * Sleep 1000 - Allow cookies to build up
+		 * Legacy -> Enter -> Esc
+		 * Reincarnate -> Enter
 		 * 
 		 */
 		private void rebirthCycle() {
@@ -192,7 +170,7 @@ public class Rebirth {
 
 				
 				//buildings and upgrades 1
-					r.mouseMove( lower.x, lower.y); //close expanded upgrade menu
+					//r.mouseMove( lower.x, lower.y); //close expanded upgrade menu //TODO check if the timings are correct with this line commented out
 					Thread.sleep(100);	
 					buyCycle(2);
 					click( buyAllUpgrades );
@@ -264,30 +242,72 @@ public class Rebirth {
 			Thread.sleep(Duration.ofNanos(50000));
 			r.keyRelease(k);
 		}
-
+		
+		/**
+		 * Toggles continueRebirth between true and false
+		 */
 		public void toggleContinueRebirth() {
 			this.continueRebirth = !continueRebirth;
 		}
 		
-		private void buyCycle( int count ) throws InterruptedException {
-			for ( int i = 0; i < count; i++) {
+		/**
+		 * Buys Cursor and Grandma with 100ms sleep between them loop number of times.
+		 * @param loop The number of times to execute the loop
+		 * @throws InterruptedException If the Thread.sleep() is interrupted. 
+		 */
+		private void buyCycle( int loop ) throws InterruptedException {
+			for ( int i = 0; i < loop; i++) {
 				click( buyCursor );
 				Thread.sleep(100);
 				click( buyGrandma );
 				Thread.sleep(100);
 			}
-			
 		}
+		
+		
+	//getters
+		public Coordinate getBuy100() {
+			return buy100;
+		}
+		public Coordinate getBuyAllUpgrades() {
+			return buyAllUpgrades;
+		}
+		public Coordinate getBuyCursor() {
+			return buyCursor;
+		}
+		public Coordinate getBuyGrandma() {
+			return buyGrandma;
+		}
+		public Coordinate getLegacy() {
+			return legacy;
+		}
+		public Coordinate getReincarnate() {
+			return reincarnate;
+		}
+		public static boolean getBuilding() {
+			return building;
+		}
+		public String getToggleKey() {
+			return toggleKey;
+		}
+		public boolean getContnueRebirth() {
+			return continueRebirth;
+		}
+		
+		
+	//setters
+		public static void setContinueThread( boolean b ) {
+			Rebirth.continueThread = b;
+		}
+		
+		/**
+		 * Takes a String, sets it to upper case, and assigns it to the toggleKey. Logs the action. 
+		 * @param s A String to become the toggle key
+		 */
+		public void setToggleKey( String s ) {
+			this.toggleKey = s.toUpperCase();
+			Logger.log("Rebirth toggle key set to : " + s );
+		}	
 
-		
-
-		
-
-		
-		
-
-		
-
-		
-		
+			
 }

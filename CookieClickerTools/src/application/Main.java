@@ -35,61 +35,72 @@ public class Main extends Application {
 		//private static final int FONT_SIZE = 25;
 		//private static final Font DEFAULT_FONT = Font.font("Arial", FONT_SIZE);
 
-		
+			
 	
-	@Override
-	@OnStartup
 	/**
-	 * 
+	 * Starts the logger and launches the UI
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		//opens the file for the logger and builds the header
+		Logger.buildLogger();
+		//launch calls start()
+		launch(args);
+	}
+	
+	/**
+	 * Called by the launch(args) in main. 
 	 * @param stage An object of type Stage from JavaFX
 	 */
+	@Override
+	@OnStartup
 	public void start(Stage stage) {
 		
 		try {
-			//BorderPane root = new BorderPane();
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("something.fxml"));
 			Parent root = loader.load();
 			Controller controller = loader.getController();
+			Scene scene = new Scene(root,BG_COLOR);
 			
 			//global input handlers 
 				final KeyListener KEY_LISTENER = new KeyListener(controller);
 				final MouseListener MOUSE_LISTENER = new MouseListener(controller);
 			
-			Scene scene = new Scene(root,BG_COLOR);
 			
-			//Mouse and key Listeners
-				
+			
+			//Mouse and key Listeners	
 				nativeHookLogFixer();
 				GlobalScreen.registerNativeHook();
 				GlobalScreen.addNativeKeyListener(KEY_LISTENER);
 				GlobalScreen.addNativeMouseListener(MOUSE_LISTENER);
 			
-			stage.setTitle(SCENE_TITLE);
+			//Title of the window
+				stage.setTitle(SCENE_TITLE);
 			
 			//sets the image icon in the top left corner for the stage
-			Image icon = new Image(ICON_PATH);
-			stage.getIcons().add(icon);
+				Image icon = new Image(ICON_PATH);
+				stage.getIcons().add(icon);
 			
 			//width and height
-			stage.setWidth(STAGE_WIDTH);
-			stage.setHeight(STAGE_HEIGHT);
-			stage.setResizable(false);
+				stage.setWidth(STAGE_WIDTH);
+				stage.setHeight(STAGE_HEIGHT);
+				stage.setResizable(false);
 			
 			//set window start location
 			//without this it defaults to the middle
-			stage.setX(STAGE_X);
-			stage.setY(STAGE_Y);
+				stage.setX(STAGE_X);
+				stage.setY(STAGE_Y);
 			
-			stage.setFullScreen(IS_FULLSCREEN);
-			stage.setFullScreenExitHint(FS_EXIT_HINT);
-			stage.setFullScreenExitKeyCombination(FS_EXIT_KEY);
+			//fullscreen configs
+				stage.setFullScreen(IS_FULLSCREEN);
+				stage.setFullScreenExitHint(FS_EXIT_HINT);
+				stage.setFullScreenExitKeyCombination(FS_EXIT_KEY);
 			
-			
-			
-			
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			//adds the css style to the scene
+				scene.getStylesheets().add( getClass().getResource( "application.css" ).toExternalForm() );
+				
 			//add scene to the stage
-			stage.setScene(scene);
+				stage.setScene(scene);
 			
 			//display the window
 			stage.show();
@@ -102,19 +113,12 @@ public class Main extends Application {
 	}
 	
 	/**
-	 * This is called when the stage is closed. 
-	 * This does not get marked with @OnShutdown, everything it call does.
+	 * This is called when the stage is closed.
 	 */
+	@OnShutdown
 	public void stop() {
 		if ( Logger.getFileWriter() != null ) 
 			Logger.closeFile();
-	}
-	
-	public static void main(String[] args) {
-		//opens the file for the logger and builds the header
-		Logger.buildLogger();
-		//launch calls start()
-		launch(args);
 	}
 	
 	/**

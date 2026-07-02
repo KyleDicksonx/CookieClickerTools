@@ -28,10 +28,14 @@ public class Clicker {
 		try {
 			robot = new Robot();
 		} catch ( AWTException e ) {
-			Logger.log("AWTException caught in Clicker constructor, Mouse and keyboard output may not function.S");
+			Logger.log("AWTException caught in Clicker constructor, Mouse and keyboard output may not function.");
 		}
 	}
 	
+	/**
+	 * Used by the subclass Wrinkler
+	 * @param toggleKey The key used to toggle the clicker. 
+	 */
 	public Clicker( String toggleKey ) {
 		this.toggleKey = toggleKey;
 		
@@ -39,7 +43,7 @@ public class Clicker {
 		try {
 			robot = new Robot();
 		} catch ( AWTException e ) {
-			Logger.log("AWTException caught in Clicker constructor, Mouse and keyboard output may not function.S");
+			Logger.log("AWTException caught in Clicker constructor, Mouse and keyboard output may not function.");
 		}
 	}
 	
@@ -52,6 +56,7 @@ public class Clicker {
 			
 			clicking = true;
 			Logger.log("Clicker.toggleClicking -> true");
+			
 			//set the clicking thread
 			clickingThread = new Thread(() ->  {
 				Logger.log("Clicking Thread Created");
@@ -60,19 +65,16 @@ public class Clicker {
 			clickingThread.setDaemon(true);//allows the program to be killed with this thread still active
 			clickingThread.start();
 
-			
 		} else {
 			clicking = false;
 			Logger.log("Clicker.toggleClicking -> false");
-
-		}
-		
+		}		
 	}
 	
 	/**
 	 * Toggles the clicking state from true to false or false to true
 	 * for position based mouse clicking. 
-	 * Also starts the dedicated clicking thread
+	 * Starts the dedicated clicking thread
 	 * @param x The x position the mouse will click at
 	 * @param y The y position the mouse will click at
 	 */
@@ -95,12 +97,10 @@ public class Clicker {
 		} else {
 			clicking = false;
 			Logger.log("Clicker.toggleClicking(x,y) -> false");
-
-		}
-		
+		}		
 	}
 	
-	//just clicks the mouse
+	//Methods that click the mouse
 		/**
 		 * Clicks the mouse at the mouse's current position
 		 */
@@ -117,8 +117,7 @@ public class Clicker {
 		
 		/**
 		 * Clicks the mouse at the specified location
-		 * @param x The x position the mouse will click at
-		 * @param y The y position the mouse will click at
+		 * @param c A Coordinate object containing the position where the mouse will be clicked.
 		 */
 		public void clickPos( Coordinate c ) {
 			robot.mouseMove( c.x, c.y );
@@ -139,8 +138,7 @@ public class Clicker {
 		
 		/**
 		 * Moves the mouse to the given location and then clicks
-		 * @param x x position that the mouse will be moved to
-		 * @param y y position that the mouse will be moved to
+		 * @param c A Coordinate object containing the position where the mouse will be clicked.
 		 */
 		public void clicking( Coordinate c ) {
 			Logger.log("Clicker.clicking(x,y) called");
@@ -161,8 +159,7 @@ public class Clicker {
 		 * Uses clicking(x,y) paired with a loop and a counter to click in
 		 * a specific location a set number of times.
 		 * If the mouse is moved externally it will snap back to the set location each time this loops.
-		 * @param x x position that the mouse will be moved to
-		 * @param y y position that the mouse will be moved to
+		 * @param c A Coordinate object containing the position where the mouse will be clicked.
 		 */
 		public void countClicking( Coordinate c ) {
 			Logger.log("Clicker.countClicking(x,y) called");
@@ -233,8 +230,8 @@ public class Clicker {
 	}
 	
 	/**
-	 * Toggles the useClickCount boolean
-	 * @param i 
+	 * Toggles the useClickCount boolean.
+	 * @param i The click count.
 	 */
 	public void toggleUseClickCount( int i ) {
 		useClickCount = !useClickCount;

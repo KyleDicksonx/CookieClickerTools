@@ -1,6 +1,7 @@
 package application;
 
 /**
+ * TODO use this somewhere maybe
  * This exception exists to act as a kill switch.
  * Because this program is an auto clicker is is essential to 
  * have a sure fire way to kill it when need be. 

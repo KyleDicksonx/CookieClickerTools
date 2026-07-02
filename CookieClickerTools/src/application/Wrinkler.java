@@ -79,7 +79,9 @@ public class Wrinkler extends Clicker{
 	 * @param t
 	 */
 	public void circleMaker( Label t, TextArea ta ) {
+		
 		Logger.log("Wrinkler.circleMaker called");
+		
 		//set the wrinkler thread
 		wrinklerThread = new Thread(() ->  {
 			//get up and down Coordinates for the circle
@@ -89,15 +91,14 @@ public class Wrinkler extends Clicker{
 			//make an array of positions around the circle
 			circlePoints = makeCirclePoints();
 			
-			Platform.runLater( () -> { ta.setText( up.toString() + "\n" + down.toString() ); } );
-			Platform.runLater( () -> { t.setText("All Positions Recorded."); } );
+			//run on the JavaFX thread
+				Platform.runLater( () -> { ta.setText( up.toString() + "\n" + down.toString() ); } );
+				Platform.runLater( () -> { t.setText("All Positions Recorded."); } );
+			
 			Logger.log(Arrays.toString(circlePoints));
 		});
 		wrinklerThread.setDaemon(true);//allows the program to be killed with this thread still active
 		wrinklerThread.start();
-		
-		
-		
 		
 	}
 	

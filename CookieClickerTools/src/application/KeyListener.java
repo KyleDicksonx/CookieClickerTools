@@ -22,7 +22,7 @@ public class KeyListener implements NativeKeyListener{
 	 * 
 	 * 
 	 * Actions:
-	 * 	Escape - Hard coded kill switch for the clicker.
+	 * 	Escape - Stops all clickers.
 	 * 	Toggle Clicking - Set by the user; default of F1.
 	 *  Toggle Rebirth - Set by the user; default of F2.
 	 *  Toggle Wrinkler - Set by the user; default of F3.
@@ -34,8 +34,6 @@ public class KeyListener implements NativeKeyListener{
 	@Override
 	public void nativeKeyPressed( NativeKeyEvent n ){
 		
-		
-		
 		//gets the name of the pressed key as a string
 		String key = NativeKeyEvent.getKeyText( n.getKeyCode() );
 		lastKeyPressed = key;
@@ -45,7 +43,7 @@ public class KeyListener implements NativeKeyListener{
 		//executes the correct action for the pressed key.
 		//Note: Don't use switch, it needs constants.
 		if ( key.equals("Escape") ) { //Kill Switch
-			controller.getClicker().setClicking(false);
+			disableAllClickers();
 			
 		} else if ( key.equals( controller.getClicker().getToggleKey() ) ) { //clicker toggle 
 			controller.clickerClicking( null );
@@ -54,16 +52,13 @@ public class KeyListener implements NativeKeyListener{
 			//ensures rebirth exists before attempting to toggle rebirth clicking
 			toggleRebirth( key );
 			
-	
 		} else if ( key.equals( controller.getWrinkler().getToggleKey() ) ) { // wrinkler toggle
 			controller.wrinklerToggleClicking();
-		}
-
-		
+		}	
 	}
 	
 	/**
-	 * Unused method
+	 * Unused method required by the interface
 	 * @param 
 	 */
 	@Override
@@ -96,9 +91,13 @@ public class KeyListener implements NativeKeyListener{
 		controller.getWrinkler().setClicking(false);
 	}
 	
-	public String getLastKeyPressed() {
-		return lastKeyPressed;
-	}
+	
+	
+	//getters
+	
+		public String getLastKeyPressed() {
+			return lastKeyPressed;
+		}
 	
 	
 }

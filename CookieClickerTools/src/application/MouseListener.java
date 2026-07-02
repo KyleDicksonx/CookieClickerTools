@@ -23,7 +23,6 @@ public class MouseListener implements NativeMouseListener{
 	 * This will pick up Java's Robot clicking.
 	 * This clicker uses Robot.
 	 * 
-	 * Any mouse click will disable the auto clicker
 	 */
 	@Override
 	public void nativeMouseClicked( NativeMouseEvent n ) {
@@ -69,14 +68,14 @@ public class MouseListener implements NativeMouseListener{
 	}
 	
 	//setters
-	public void setLastClickPosition( int x, int y) {
-		MouseListener.lastClickPosition =  new Coordinate( x, y );
-	}
+		public void setLastClickPosition( int x, int y) {
+			MouseListener.lastClickPosition =  new Coordinate( x, y );
+		}
 	
 	//getters
-	public static Coordinate getLastClickPosition() {
-		return MouseListener.lastClickPosition;
-	}
+		public static Coordinate getLastClickPosition() {
+			return MouseListener.lastClickPosition;
+		}
 	
 	
 	/**
