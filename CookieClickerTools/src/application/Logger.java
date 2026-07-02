@@ -11,6 +11,7 @@ import java.time.format.DateTimeFormatter;
  * Log files are named with the following convention:
  * log_YYYY-MM-dd_HH-mm-ss.txt
  * Logs are stored in CookieClickerTools/Logs
+ * TODO add logger levels to limit the amount of logs shown
  */
 public class Logger {
 	

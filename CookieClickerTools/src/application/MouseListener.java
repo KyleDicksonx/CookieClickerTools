@@ -5,6 +5,7 @@ import com.github.kwhat.jnativehook.mouse.NativeMouseListener;
 
 
 public class MouseListener implements NativeMouseListener{
+	
 	private Controller controller;
 	private static Coordinate lastClickPosition = null;
 	
