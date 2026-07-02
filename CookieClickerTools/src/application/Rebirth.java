@@ -149,7 +149,15 @@ public class Rebirth {
 
 		public static void setContinueThread( boolean b ) {
 			Rebirth.continueThread = b;
-			
+		}
+		
+		/**
+		 * Takes a String, sets it to upper case, and assigns it to the toggleKey. Logs the action. 
+		 * @param s A String to become the toggle key
+		 */
+		public void setToggleKey( String s ) {
+			this.toggleKey = s.toUpperCase();
+			Logger.log("Rebirth toggle key set to : " + s );
 		}
 		
 	//Auto rebirth
@@ -166,6 +174,9 @@ public class Rebirth {
 	
 		}
 		
+		/**
+		 * 
+		 */
 		private void rebirthCycle() {
 			try {
 				//wait before clicking in a new cycle so that clicks process properly
@@ -267,6 +278,8 @@ public class Rebirth {
 			}
 			
 		}
+
+		
 
 		
 
