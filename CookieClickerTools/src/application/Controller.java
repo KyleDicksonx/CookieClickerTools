@@ -144,8 +144,7 @@ public class Controller {
 	//Rebirth Tab Actions -----------------------------------------------------------------------------
 		
 		public void rebirthChangeKeyPressed() {
-			//TODO implement changing the toggle key
-			//reuse ideas from the clicker tab toggle key
+			rebirth.setToggleKey( rebirthToggleKey.getText() );
 		}
 		
 		public void rebirthStartRecording() {
@@ -201,13 +200,14 @@ public class Controller {
 		}
 		
 		
+		
 	//Wrinkler Tab actons ---------------------------------------------------------------------------------------
 		public void wrinklerBuildCircle() {
 			wrinkler.circleMaker( wrinklerWhereClickText, wrinklerLocationDisplay );
 		}
 		
 		public void wrinklerChangeKey() {
-			//TODO implement key changing
+			wrinkler.setToggleKey( wrinklerToggleKey.getText() );
 		}
 		
 		public void wrinklerToggleClicking() {
@@ -224,7 +224,10 @@ public class Controller {
 			}
 		}
 		
-		
+	//Settings tab actions ------------------------------------------------------------------
+		public void settingsToggleAllowMouseClicks() {
+			Settings.toggleAllowMouseClicks();
+		}
 		
 		
 		
