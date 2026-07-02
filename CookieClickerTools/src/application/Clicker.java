@@ -16,7 +16,7 @@ public class Clicker {
 	private int clickCount = 100;
 	protected Robot robot;
 	
-	private String toggleKey = "F1"; //must be upper case, enforced by the setter
+	protected String toggleKey = "F1"; //must be upper case, enforced by the setter
 	
 	/**
 	 * Default constructor
@@ -214,8 +214,7 @@ public class Clicker {
 	/**
 	 * Called by toggle clicking to call the correct clicker loop.
 	 * Checks the value of useClickCount to determine if we should use click count method or endless method.
-	 * @param x The x position the mouse will be clicked at
-	 * @param y The y position the mouse will be clicked at
+	 * @param c A Coordinate object. The position where the mouse will be clicked
 	 */ 
 	public void clickerChooser( Coordinate c ) {
 		if ( useClickCount ) {
@@ -237,7 +236,7 @@ public class Clicker {
 	 * Toggles the useClickCount boolean
 	 * @param i 
 	 */
-	public void toggleUseClickCount(int i) {
+	public void toggleUseClickCount( int i ) {
 		useClickCount = !useClickCount;
 		Logger.log( "useClickCount set to : " + useClickCount );
 		setClickCount(i);
@@ -269,7 +268,7 @@ public class Clicker {
 		//toggleKey
 		public void setToggleKey( String s ) {
 			this.toggleKey = s.toUpperCase();
-			Logger.log("Toggle key set to : " + s );
+			Logger.log("Clicker toggle key set to : " + s );
 		}
 		
 		//clickCount
