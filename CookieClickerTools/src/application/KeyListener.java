@@ -4,8 +4,9 @@ import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
 
 public class KeyListener implements NativeKeyListener{
-	private Controller controller;
 	
+	private Controller controller;
+	private String lastKeyPressed = "";
 
 	public KeyListener ( Controller controller ) {
 		this.controller = controller;
@@ -13,7 +14,7 @@ public class KeyListener implements NativeKeyListener{
 	
 	@Override
 	public void nativeKeyTyped( NativeKeyEvent n ) {
-		//System.out.println(NativeKeyEvent.getKeyText(n.getKeyCode())); 
+		//Logger.log(NativeKeyEvent.getKeyText(n.getKeyCode())); 
 	}
 	
 	/**
@@ -22,9 +23,9 @@ public class KeyListener implements NativeKeyListener{
 	 * 
 	 * Actions:
 	 * 	Escape - Hard coded kill switch for the clicker.
-	 * 	Toggle Clicking - Set by the user; defaults to F1.
-	 *  Toggle Rebirth - Set by the user; defaults to F2.
-	 *  Toggle Wrinkler - Set by the user; defaults to F3.
+	 * 	Toggle Clicking - Set by the user; default of F1.
+	 *  Toggle Rebirth - Set by the user; default of F2.
+	 *  Toggle Wrinkler - Set by the user; default of F3.
 	 * 
 	 * 
 	 * 
@@ -32,12 +33,12 @@ public class KeyListener implements NativeKeyListener{
 	 */
 	@Override
 	public void nativeKeyPressed( NativeKeyEvent n ){
-		//disableAllClickers();
+		
 		
 		
 		//gets the name of the pressed key as a string
 		String key = NativeKeyEvent.getKeyText( n.getKeyCode() );
-		//System.out.println(controller.getClicker().getToggleKey());
+		lastKeyPressed = key;
 		//Logger.log( "KeyDown : " + key );
 		
 
@@ -93,6 +94,10 @@ public class KeyListener implements NativeKeyListener{
 		controller.getClicker().setClicking(false);
 		Rebirth.setContinueThread(false);
 		controller.getWrinkler().setClicking(false);
+	}
+	
+	public String getLastKeyPressed() {
+		return lastKeyPressed;
 	}
 	
 	
